@@ -1,29 +1,178 @@
 
-h1 { font-size: 3em; font-weight: bold; margin-top: 0;}
+#logoRow{
+    padding:65px 5px 15px 5px;
+}
+
+/*#detailTable{*/
+    /*border: 1px silver solid;*/
+/*}*/
+
+footer{
+    clear: both;
+}
+
+
+#detailTable>thead{
+    background-color:#e1e1e8;
+}
+
+#middle{
+    width: 80%;
+    float: left;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.similarTitle~button{
+    font-size: small;
+    padding:3px;
+}
+
+/*#mainImg{*/
+    /*padding: 2px;*/
+/*}*/
+.img-thumbnail{
+    padding: 2px;
+}
+
+#right{
+    width: 20%;
+    float: right;
+    background-color: white;
+}
+
+.col-md-4 {
+    padding-right: 0;
+}
+
+.col-md-8{
+    padding-left: 5px;
+}
+
+h2{
+    font-weight:bold ;
+}
+
+h1 { font-size: 3em; font-weight: bolder; margin-top: 0; width: 40%; margin: 0;}
 
 div#topHeaderRow {
    font-size: 0.9em;
 }
 
-.price { 
-
+.price {
+    color: red;
+    font-weight:bold;
+    font-size: x-large;
 }
 
-.similarTitle {  }
+.similarTitle {
+    font-size: small;
+}
 
-.cartText { 
+#justOrdered em{
+    font-size: small;
+}
 
+#similarProducts>.img-thumbnail{
+    margin-right: 10px;
+}
+
+#contactUsBtn{
+    margin-bottom: 2em;
+}
+
+.col-md-3{
+    padding-left: 0;
+}
+
+.cartText {
+    padding-left: 15px;
+}
+
+#cartButtons{
+    padding-left: 15px;
+}
+
+#right li{
+    line-height:2.5em;
 }
 
 footer {
    margin-top: 1em;
    background-color: #E7E7E7;
+}
+footer h4{
+    font-weight: bold;
+}
 
+#customerService{
+    line-height: 3em;
+}
+
+#totalPrice{
+    color:goldenrod;
 }
 
 .tight-form-group {  }
 
 #copyrightRow { 
-    background-color: #3A3A3A; 
+    background-color: #3A3A3A;
+    /*width: 100%;*/
+}
 
+#justOrdered img{
+    display: inline;
+}
+
+/*#justOrdered*/
+
+#copyrightRow p{
+    margin-bottom: 0;
+    line-height: 3em;
+    color: grey;
+    padding-left: 5%;
+}
+
+#copyrightRow p span{
+    float: right;
+    padding-right: 3%;
+}
+/*#right .col-mid-3{*/
+    /*padding-right: 5px;*/
+/*}*/
+
+#top{
+    width: 90%;
+    margin: 0 auto;
+}
+
+h3{
+    margin: 0;
+
+}
+
+.similarTitle{
+    font-weight: bold;
+}
+
+#similarProducts{
+    padding: 0;
+}
+
+#similar>h3{
+    font-weight: bold;
+}
+
+
+.img-thumbnail>.img-thumbnail{
+    margin-left: 10px;
+
+}
+
+li{
+    list-style-type:none
+}
+
+.form-group{
+    margin-bottom: 5px;
 }
