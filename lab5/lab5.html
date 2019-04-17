@@ -12,10 +12,10 @@
    <link href="lab5.css" rel="stylesheet">
 
    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-   <!--[if lt IE 9]>
-   <script src="bootstrap3_defaultTheme/assets/js/html5shiv.js"></script>
-   <script src="bootstrap3_defaultTheme/assets/js/respond.min.js"></script>
-   <![endif]-->
+   <!--&lt;!&ndash;[if lt IE 9]>-->
+   <!--<script src="bootstrap3_defaultTheme/assets/js/html5shiv.js"></script>-->
+   <!--<script src="bootstrap3_defaultTheme/assets/js/respond.min.js"></script>-->
+   <!--<![endif]&ndash;&gt;-->
 </head>
 
 <body>
@@ -58,7 +58,7 @@
             <div class="col-md-4">
                <form class="form-inline" role="search">
                <div class="input-group">
-                  <label class="sr-only" for="search">Search</label>
+                  <label class="sr-only">Search</label>
                   <input type="text" class="form-control" placeholder="Search" name="search">
                   <span class="input-group-btn">
                   <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
@@ -117,7 +117,7 @@
          <h2>View Cart</h2>
       </div>
          
-      <table class="table table-condensed">
+      <table class="table table-condensed" id="infoTable">
          <tr>
             <th>Image</th>
             <th>Product</th>
@@ -158,27 +158,75 @@
          $price2 = 700;
         -->
 
-         <tr class="success strong">
+
+         <tr class="success strong" id="subtotalRow">
             <td colspan="4" class="moveRight">Subtotal</td>
-            <td >$1700</td>
+            <td id="subtotal">$1700</td>
          </tr>
          <tr class="active strong">
             <td colspan="4" class="moveRight">Tax</td>
-            <td>$170</td>
+            <td id="tax">$170</td>
          </tr>  
          <tr class="strong">
             <td colspan="4" class="moveRight">Shipping</td>
-            <td>$100</td>
+            <td id="shipping">$100</td>
          </tr> 
          <tr class="warning strong text-danger">
             <td colspan="4" class="moveRight">Grand Total</td>
-            <td>$1970</td>
+            <td id="grandTotal">$1970</td>
          </tr>    
          <tr >
             <td colspan="4" class="moveRight"><button type="button" class="btn btn-primary" >Continue Shopping</button></td>
             <td><button type="button" class="btn btn-success" >Checkout</button></td>
          </tr>
-      </table>         
+      </table>
+
+    <script>
+        let product=new Array();
+        product[0]=new Array();
+        product[0][0]="<img class=\"img-thumbnail\" src=\"images/art/tiny/116010.jpg\" alt=\"...\">";
+        product[0][1]="Artist Holding a Thistle";
+        product[0][2]="2";
+        product[0][3]="$500";
+
+        product[1]=new Array();
+        product[1][0]="<img class=\"img-thumbnail\" src=\"images/art/tiny/113010.jpg\" alt=\"...\">";
+        product[1][1]="Self-portrait in a Straw Hat";
+        product[1][2]="1";
+        product[1][3]="$700";
+
+        //生成商品信息
+        let index=2;
+        let column=5;
+        let subtotal=0;
+        let tax=0;
+        let shipping=0;
+        let grandTotal=0;
+        for(let i=0;i<=index-1;i++)
+        {
+            let tableRow=document.createElement("tr");
+            document.getElementById("subtotalRow").before(tableRow);//在总价上面加一行
+            subtotal+=parseFloat(product[i][2]*(product[i][3].substr(1, product[i][3].length)));
+            for(let j=0;j<column-1;j++){
+                let tableData=document.createElement("td");
+                document.getElementById("subtotalRow").previousElementSibling.appendChild(tableData);//新加的行加格子
+                document.getElementById("subtotalRow").previousElementSibling.lastElementChild.innerHTML=product[i][j];//改变新加格子的内容
+            }
+            let tableData=document.createElement("td");
+            document.getElementById("subtotalRow").previousElementSibling.appendChild(tableData);//算出一行的总价
+            document.getElementById("subtotalRow").previousElementSibling.lastElementChild.innerHTML="$"+product[i][2]*(product[i][3].substr(1, product[i][3].length));
+        }
+
+        tax=subtotal/10;
+        shipping=Math.ceil(subtotal/17);
+        grandTotal=subtotal+tax+shipping;
+
+        document.getElementById("subtotal").innerText=subtotal;
+        document.getElementById("tax").innerText=tax;
+        document.getElementById("shipping").innerText=shipping;
+        document.getElementById("grandTotal").innerText=grandTotal;
+
+    </script>
 
 </div>  <!-- end container -->
 
@@ -232,15 +280,15 @@
             <h4><span class="glyphicon glyphicon-envelope"></span> Contact us</h4>
             <form role="form">
               <div class="form-group tight-form-group">
-                <label class="sr-only" for="name">Name</label>
+                <label class="sr-only">Name</label>
                 <input type="text" class="form-control" name="email" placeholder="Enter name ...">
               </div> 
               <div class="form-group tight-form-group">
-                <label class="sr-only" for="email">Email</label>
+                <label class="sr-only">Email</label>
                 <input type="email" class="form-control" name="email" placeholder="Enter email ...">
               </div> 
               <div class="form-group tight-form-group">
-                <label class="sr-only" for="email">Email</label>
+                <label class="sr-only">Email</label>
                 <textarea class="form-control" rows="3" placeholder="Enter message ..."></textarea>
               </div>   
               <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -264,7 +312,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap3_defaultTheme/assets/js/jquery.js"></script>
-    <script src="bootstrap3_defaultTheme/dist/js/bootstrap.min.js"></script>    
+    <!--<script src="bootstrap3_defaultTheme/assets/js/jquery.js"></script>-->
+    <script src="bootstrap3/js/bootstrap.min.js"></script>
   </body>
 </html>
