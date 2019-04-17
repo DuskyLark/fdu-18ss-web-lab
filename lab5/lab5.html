@@ -218,7 +218,7 @@
         }
 
         tax=subtotal/10;
-        shipping=Math.ceil(subtotal/17);
+        subtotal>1000?shipping=0:shipping=40;
         grandTotal=subtotal+tax+shipping;
 
         document.getElementById("subtotal").innerText=subtotal;
