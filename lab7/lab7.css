@@ -43,7 +43,7 @@ h1 {
     background-color: white;
 
 }
-button {
+#resetFilters {
     background-color: #EF6C00;
     color: white;
     border: 0;
@@ -70,13 +70,12 @@ figcaption {
 }
 
 .tiled {
-    background-image:url(../images/stripes.jpg);
+    /*background-image:url(/images/stripes.jpg);*/
     background-repeat:repeat; 
 }
 
-/* temp tester 
+/*temp tester */
 #imgManipulated img {
-   filter: opacity(62%) brightness(50%) contrast(50%);   
--webkit-filter: opacity(62%) brightness(50%) contrast(50%);  
+   /*filter: opacity(62%) brightness(50%) contrast(50%);*/
+    /*-webkit-filter: opacity(62%) brightness(50%) contrast(50%);*/
 }
-*/
