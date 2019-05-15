@@ -1,7 +1,9 @@
 <?php include 'functions.inc.php'; ?>
 <?php 
 
-include 'data.inc.php'; 
+include 'data.inc.php';
+include 'header.inc.php';
+include 'left.inc.php';
 
 $shippingThreshold = 10000;
 $shippingFlatAmount = 200;
@@ -9,9 +11,14 @@ $shippingFlatAmount = 200;
 // 计算 subtotal, shipping, grand total
 // grand total = subtotal + shipping
 // 如果subtotal值超过阈值，则为100；反之则为$shippingFlatAmount
-$subtotal = 0;
-$shipping = 0;
-$grandTotal = 0;
+$subtotal = $quantity1*$price1+$quantity2*$price2+$quantity3*$price3+$quantity4*$price4;//计算商品总价
+if($subtotal>$shippingThreshold){//计算运费
+    $shipping = 100;
+}
+else{
+    $shipping=$shippingFlatAmount;
+}
+$grandTotal = $subtotal+$shipping;//计算商品总价+运费
 
 ?>
 
