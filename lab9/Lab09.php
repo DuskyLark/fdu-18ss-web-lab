@@ -14,8 +14,8 @@ include 'travel-data.inc.php';
     <title>Chapter 12</title>
 
       <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<!--    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>-->
+<!--    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
 
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     
@@ -36,13 +36,20 @@ include 'travel-data.inc.php';
         
         <div class="btn-group countryButtons" role="group" aria-label="...">
               <a role="button" class="btn btn-default" href="list.php">All</a>
-           
-              <?php   
+
+
+            <?php
               /* you will need to fill this place with appropriate PHP */
               /* hint: use array and loop */
               //the next line is an example
-              //<a href="list.php?country=Canada" role="button" class="btn btn-default"> Canada</a> 
-
+//              <a href="list.php?country=Canada" role="button" class="btn btn-default"> Canada</a>
+            function outputPageContent($countryName) {
+                $countryHref="list.php?country=".$countryName;
+                echo"<a href=\"$countryHref\" role='button' class='btn btn-default'>$countryName</a>";
+            }
+            foreach ($countries  as $name=>$value){
+                outputPageContent($value);
+            }
 
               ?>
                      
@@ -57,20 +64,32 @@ include 'travel-data.inc.php';
           /* hint: use array and loop */
           //the next lines are one of the elements
           //you need to fill the elements with data provided
+//          $images[22] = array("id"=>22,"title" => "View of Cologne", "description" => "View of Cologne from atop the Cologne Cathedral", "country" => "Germany", "city" => "Cologne", "user" => "Joao Fernandes", "path" => "6114850721.jpg", "taken" => "August 8, 2017", "tags" => array("cathedral","high","birds-eye"));
+
+          function outputImages($id,$title,$path){
+              $imgHref="detail.php?id=".$id;
+              $imgSrc="images/square/".$path;
+              $imgAlt=$title;
+              $imgCaption=$title;
+              echo"<li><a href=\"$imgHref\" class='img-responsive'>";
+              echo"<img src=\"$imgSrc\" alt=\"$imgAlt\">";
+              echo "<div class=\"caption\"><div class=\"blur\"></div><div class=\"caption-text\">";
+              echo"<h1>\"$imgCaption</h1>";
+              echo "</div></div></a></li>";
+          }
 
 
-   //        <li>
-   //              <a href="detail.php?id=22" class="img-responsive">
-   //              	<img src="images/square/6114850721.jpg" alt="View of Cologne">
-   //              	<div class="caption">
-   //              		<div class="blur">
-   //              		</div>
-   //              		<div class="caption-text">
-   //              			<h1>View of Cologne</h1>
-   //              		</div>
-   //              	</div>
-   //              </a>
-			// </li>
+          foreach ($images as $key=>$value) {
+//              $id=array_keys($this)[0];
+              $id=$value["id"];
+              $title=$value["title"];
+              $path=$value["path"];
+
+//              $title=array_keys($this)[1];
+//              $path=array_keys($this)[6];
+              outputImages($id,$title,$path);
+          }
+
           ?>
 
        </ul>       
