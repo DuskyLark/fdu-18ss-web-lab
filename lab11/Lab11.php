@@ -3,7 +3,11 @@
 
 //****** Hint ******
 //connect database and fetch data here
-
+$conn=mysqli_connect('localhost','root','','travel');//no password
+//check connection
+if(!$conn){
+    echo 'connection error:'.mysqli_connect_error();
+}
 
 ?>
 
@@ -42,6 +46,10 @@
               <select name="continent" class="form-control">
                 <option value="0">Select Continent</option>
                 <?php
+                $sql="SELECT * FROM continents";
+                //make query & get result
+                $result=mysqli_query($conn,$sql);
+                //fetch the resulting rows as array
                 //Fill this place
 
                 //****** Hint ******
@@ -58,13 +66,18 @@
                 <option value="0">Select Country</option>
                 <?php 
                 //Fill this place
-
+                $sql="SELECT * FROM countries";
+                //make query & get result
+                $result=mysqli_query($conn,$sql);
                 //****** Hint ******
-                /* display list of countries */ 
+                /* display list of countries */
+                while($row = $result->fetch_assoc()) {
+                    echo '<option value=' . $row['ISO'] . '>' . $row['CountryName'] . '</option>';
+                }
                 ?>
               </select>    
               <input type="text"  placeholder="Search title" class="form-control" name=title>
-              <button type="submit" class="btn btn-primary">Filter</button>
+              <button type="submit" class="btn btn-primary" action="Lab11.php">Filter</button>
               </div>
             </form>
 
@@ -73,7 +86,61 @@
                                     
 
 		<ul class="caption-style-2">
-            <?php 
+            <?php
+
+            $restrict="";
+//          
+            if(!isset($_GET["continent"])){
+                $_GET["continent"]="0";
+            }
+            if(!isset($_GET["country"])){
+                $_GET["country"]="0";
+            }
+            $continentRestrict=$_GET["continent"];
+            $countryRestrict=$_GET["country"];
+
+            if($_GET["continent"]!="0"){//如果选择了州
+                $restrict=$restrict."ContinentCode ="."'$continentRestrict'";
+                if($_GET["country"]!="0"){//如果选择了国家
+                    $restrict=$restrict." AND CountryCodeISO="."'$countryRestrict'";
+                    $sql="SELECT * FROM imagedetails WHERE $restrict" ;
+                }
+                else{//如果没有选择国家
+                    $sql="SELECT * FROM imagedetails WHERE $restrict" ;
+                }
+            }
+            else{//如果没有选择州
+                if($_GET["country"]!="0"){//如果选择了国家
+                    $restrict=$restrict."CountryCodeISO ="."'$countryRestrict'";
+                    $sql="SELECT * FROM imagedetails WHERE $restrict" ;
+                }
+                else{//如果没有选择国家
+                    $sql="SELECT * FROM imagedetails" ;
+                }
+            }
+//            echo $sql;
+            ////make query & get result
+            $result = mysqli_query($conn, $sql);
+//
+            while($row = $result->fetch_assoc()) {
+//                echo '<option value=' . $row['ISO'] . '>' . $row['CountryName'] . '</option>';
+                $url="detail.php?id=".$row['UID'];
+                $imgUrl="images/square-medium/".$row['Path'];
+                $alt=$row['Title'];
+                $caption=$row['Description'];
+                echo "<li>";
+                echo "<a href=\"$url\" class='img-responsive'>";
+                echo "<img src=\"$imgUrl\" alt=\"$alt\">";
+                echo "<div class='caption'>";
+                echo "<div class='blur'></div>";
+                echo "<div class='caption-text'>";
+                echo " <p>$caption</p>";
+                echo " </div>";
+                echo " </div>";
+                echo "</a>";
+                echo "</li>";
+            }
+
             //Fill this place
 
             //****** Hint ******
